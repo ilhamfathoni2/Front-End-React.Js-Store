@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useRef } from "react";
 
 import { Button, Form, Modal, Alert } from "react-bootstrap";
 
@@ -9,6 +9,8 @@ function AddItems() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const filePickerRef = useRef();
 
   const [message, setMessage] = useState(null);
 
@@ -76,7 +78,13 @@ function AddItems() {
             {message && message}
             <Form.Group className="mb-3 mt-4">
               <Form.Label>Foto Barang</Form.Label>
-              <Form.Control type="file" name="image" onChange={handleChange} />
+              <Form.Control
+                type="file"
+                ref={filePickerRef}
+                accept=".jpg,.png"
+                name="image"
+                onChange={handleChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Nama Barang</Form.Label>
