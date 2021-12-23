@@ -31,7 +31,7 @@ function AddItems() {
   };
 
   const SubmitData = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       const config = {
         headers: {
