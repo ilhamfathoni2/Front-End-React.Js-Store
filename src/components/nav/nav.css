@@ -1,0 +1,31 @@
+.menu-card {
+  color: #fdfdfd;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.menu-card:hover {
+  color: #0383ce;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.menu-active {
+  color: #0383ce;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.menu-logout {
+  color: #ff0000a2;
+  cursor: pointer;
+}
+
+.menu-logout:hover {
+  color: #ff0000;
+  cursor: pointer;
+}
+
+.bg-black-soft {
+  background-color: #2c2828;
+}

@@ -1,0 +1,12 @@
+body {
+  background-color: #dfdfdf;
+}
+
+.card {
+  border: none !important;
+}
+
+.btn-group-lg > .btn,
+.btn-lg {
+  padding: 0.375rem 0.75rem !important;
+}
