@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
-import { Form, Button, Card, Image, Modal } from "react-bootstrap";
+import { Form, Button, Card, Image, Modal, Badge } from "react-bootstrap";
 import "./items.css";
 
 import { API } from "../../config/api";
@@ -27,46 +27,43 @@ function DetailManage({ item }) {
   return (
     <>
       <div className="space" key={item}>
-        <Card style={{ width: "18rem" }}>
-          <Card.Body className="pointer">
+        <Card className="card-items">
+          <Card.Body>
             <Image src={item.image} className="img mb-3" />
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between rs">
               <h5 className="name-item">{item.name}</h5>
-              <h5 className="text-danger">
+              <h5 className="text-danger Rp">
                 <b>{convertRupiah.convert(item.priceSell)}</b>
               </h5>
             </div>
             <div className="d-flex justify-content-end mt-2">
-              <Button variant="danger mr-3" onClick={handleShow}>
-                Delete
-              </Button>
-              <Button
-                variant="warning"
-                onClick={() => navigate(`/edit-item/${item.id}`)}
-              >
-                Edit
-              </Button>
+              <h5 onClick={handleShow}>
+                <Badge bg="danger pointer mr-3">Delete</Badge>
+              </h5>
+              <h5 onClick={() => navigate(`/edit-item/${item.id}`)}>
+                <Badge bg="warning pointer">Edit</Badge>
+              </h5>
             </div>
           </Card.Body>
         </Card>
-
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Body>
-            <Modal.Title className="text-danger">Warning!!</Modal.Title>
-            <h5 className="text-dark mt-3">
-              Are you sure you <b>delete</b> this data?
-            </h5>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button onClick={deleteItem} variant="danger">
-              Delete
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body>
+          <Modal.Title className="text-danger">Warning!!</Modal.Title>
+          <h5 className="text-dark mt-3">
+            Are you sure you <b>delete</b> this data?
+          </h5>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button onClick={deleteItem} variant="danger">
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

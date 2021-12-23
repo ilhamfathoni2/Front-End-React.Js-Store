@@ -10,6 +10,7 @@ import { API } from "../../config/api";
 import convertRupiah from "rupiah-format";
 
 import notFound from "../../assets/Notfound.png";
+import notFoundPhone from "../../assets/Notfound-phone.png";
 
 function DataItems() {
   const title = "Barang";
@@ -41,16 +42,16 @@ function DataItems() {
       <Nav />
       {datasItem.length !== 0 ? (
         <Container className="mt-1">
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap justify-content-center">
             {datasItem.map((item, index) => (
               <div className="space" key={item}>
-                <Card style={{ width: "18rem" }}>
+                <Card className="card-items">
                   <Card.Body className="pointer">
                     <Link to={`/detail/${item.id}`} className="link">
                       <Image src={item.image} className="img mb-3" />
-                      <div className="d-flex justify-content-between">
+                      <div className="d-flex justify-content-between rs">
                         <h5 className="name-item">{item.name}</h5>
-                        <h5 className="text-danger">
+                        <h5 className="text-danger Rp">
                           <b>{convertRupiah.convert(item.priceSell)}</b>
                         </h5>
                       </div>
@@ -63,7 +64,8 @@ function DataItems() {
         </Container>
       ) : (
         <div className="text-center pt-5">
-          <Image src={notFound} />
+          <Image src={notFound} className="img-lg" />
+          <Image src={notFoundPhone} className="img-sml" />
         </div>
       )}
     </>

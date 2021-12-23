@@ -63,7 +63,7 @@ function SignIn() {
       <Container>
         <div className="d-flex justify-content-center mt-5">
           <div className="shadow-lg p-3 mb-5 bg-body rounded">
-            <Card style={{ width: "30rem" }}>
+            <Card className="card-size">
               <Card.Body>
                 <h3 className="mt-3 mb-4">Sign In</h3>
                 {message && message}

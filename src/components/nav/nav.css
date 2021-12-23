@@ -29,3 +29,12 @@
 .bg-black-soft {
   background-color: #2c2828;
 }
+
+@media screen and (max-width: 700px) {
+  .menu-card,
+  .menu-active,
+  .menu-logout,
+  h5 {
+    font-size: 15px !important;
+  }
+}

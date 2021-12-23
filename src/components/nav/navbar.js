@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import { Link, useNavigate, NavLink } from "react-router-dom";
-import { Container, Card } from "react-bootstrap";
+import { useNavigate, NavLink } from "react-router-dom";
+import { Container, Card, Navbar, NavDropdown } from "react-bootstrap";
 import "./nav.css";
 import AddItems from "../items/addItems";
 

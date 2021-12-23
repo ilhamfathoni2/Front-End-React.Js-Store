@@ -7,6 +7,8 @@ import DetailManage from "../components/items/manage";
 
 import { API } from "../config/api";
 import notFound from "../assets/Notfound.png";
+import notFoundPhone from "../assets/Notfound-phone.png";
+import "../components/items/items.css";
 
 function ManageItem() {
   const title = "Manage";
@@ -38,7 +40,7 @@ function ManageItem() {
       <Nav />
       {datasItem.length !== 0 ? (
         <Container className="mt-1">
-          <div className="d-flex flex-wrap">
+          <div className="d-flex flex-wrap justify-content-center">
             {datasItem.map((item) => (
               <DetailManage item={item} key={item} />
             ))}
@@ -46,7 +48,8 @@ function ManageItem() {
         </Container>
       ) : (
         <div className="text-center pt-5">
-          <Image src={notFound} />
+          <Image src={notFound} className="img-lg" />
+          <Image src={notFoundPhone} className="img-sml" />
         </div>
       )}
     </>

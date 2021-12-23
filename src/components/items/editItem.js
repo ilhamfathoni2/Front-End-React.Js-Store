@@ -159,7 +159,7 @@ function EditItem() {
                     </Overlay>
                   </div>
                 </div>
-                <Card style={{ width: "40rem" }}>
+                <Card className="edit-page">
                   <Card.Body>
                     {message && message}
                     <Form.Group className="mb-3">
@@ -171,42 +171,36 @@ function EditItem() {
                       />
                     </Form.Group>
                     <Form onSubmit={SubmitData}>
-                      <div className="d-flex justify-content-between mt-2">
-                        <Image src={item.image} className="img mb-3" />
-                        <div className="d-flex flex-column">
-                          <Form.Group className="mb-3">
-                            <Form.Label>Foto</Form.Label>
-                            <Form.Control
-                              type="file"
-                              ref={filePickerRef}
-                              accept=".jpg,.png"
-                              onChange={handleUploadImage}
-                            />
-                          </Form.Group>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Nama Barang</Form.Label>
-                            <Form.Control
-                              value={form.name}
-                              name="name"
-                              onChange={handleChange}
-                              placeholder={item.name}
-                            />
-                          </Form.Group>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Harga Jual</Form.Label>
-                            <Form.Control
-                              type="number"
-                              min="0"
-                              value={form.priceSell}
-                              name="priceSell"
-                              onChange={handleChange}
-                              placeholder={convertRupiah.convert(
-                                item.priceSell
-                              )}
-                            />
-                          </Form.Group>
-                        </div>
-                      </div>
+                      <Image src={item.image} className="img mb-3" />
+                      <Form.Group className="mb-3">
+                        <Form.Label>Foto</Form.Label>
+                        <Form.Control
+                          type="file"
+                          ref={filePickerRef}
+                          accept=".jpg,.png"
+                          onChange={handleUploadImage}
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Nama Barang</Form.Label>
+                        <Form.Control
+                          value={form.name}
+                          name="name"
+                          onChange={handleChange}
+                          placeholder={item.name}
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Harga Jual</Form.Label>
+                        <Form.Control
+                          type="number"
+                          min="0"
+                          value={form.priceSell}
+                          name="priceSell"
+                          onChange={handleChange}
+                          placeholder={convertRupiah.convert(item.priceSell)}
+                        />
+                      </Form.Group>
                       <Form.Group className="mb-3">
                         <Form.Label>Harga Beli</Form.Label>
                         <Form.Control
