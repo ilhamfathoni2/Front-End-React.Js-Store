@@ -28,12 +28,16 @@ function EditItem() {
   const filePickerRef = useRef();
   const [datasItem, setDatasItem] = useState([]);
   const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getItems = async () => {
+    setIsLoading(true);
     try {
       const response = await API.get(`/detail-item/${id}`);
       setDatasItem(response.data.data);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -239,7 +243,7 @@ function EditItem() {
         </Container>
       ) : (
         <div className="text-center pt-5">
-          <h2 className="mt-3">No data</h2>
+          <h2 className="mt-3">{isLoading ? "Loading..." : "Loading"}</h2>
         </div>
       )}
     </>

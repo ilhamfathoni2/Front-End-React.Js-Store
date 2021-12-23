@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Form, Container, Card, Image } from "react-bootstrap";
 import "./items.css";
 import Nav from "../nav/navbar";
@@ -14,14 +14,17 @@ function DetailItem() {
   document.title = "Store | " + title;
 
   let { id } = useParams();
-
   const [datasItem, setDatasItem] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getItems = async () => {
+    setIsLoading(true);
     try {
       const response = await API.get(`/detail-item/${id}`);
       setDatasItem(response.data.data);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -65,7 +68,7 @@ function DetailItem() {
         </Container>
       ) : (
         <div className="text-center pt-5">
-          <h2 className="mt-3">No data</h2>
+          <h2 className="mt-3">{isLoading ? "Loading..." : "Loading"}</h2>
         </div>
       )}
     </>

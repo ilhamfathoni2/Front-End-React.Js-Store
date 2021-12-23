@@ -93,9 +93,11 @@ function AddItems() {
       </h5>
 
       <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Tambah Barang</Modal.Title>
+        </Modal.Header>
         <Form onSubmit={SubmitData}>
           <Modal.Body>
-            <Modal.Title>Tambah Barang</Modal.Title>
             {message && message}
             <Form.Group className="mb-3 mt-4">
               <Form.Label>Foto Barang</Form.Label>
@@ -149,15 +151,28 @@ function AddItems() {
               <Form.Label>Process Upload</Form.Label>
               <ProgressBar animated now={progress} label={`${progress}%`} />
             </Form.Group>
+            {(() => {
+              if (progress === 100) {
+                return (
+                  <form>
+                    <div className="d-grid gap-2 mt-4">
+                      <Button type="submit" variant="danger" size="lg">
+                        Show Result
+                      </Button>
+                    </div>
+                  </form>
+                );
+              } else {
+                return (
+                  <div className="d-grid gap-2 mt-4">
+                    <Button type="submit" variant="primary" size="lg">
+                      Upload
+                    </Button>
+                  </div>
+                );
+              }
+            })()}
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button type="submit" variant="primary">
-              Upload
-            </Button>
-          </Modal.Footer>
         </Form>
       </Modal>
     </>
