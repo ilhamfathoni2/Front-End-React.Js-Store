@@ -12,10 +12,9 @@ import { API } from "../../config/api";
 
 function SignIn() {
   const [, dispatch] = useContext(UserContext);
-
   let navigate = useNavigate();
-
   const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -24,6 +23,7 @@ function SignIn() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const config = {
         headers: {
@@ -34,6 +34,7 @@ function SignIn() {
       const body = JSON.stringify(data);
 
       const response = await API.post("/login", body, config);
+      setIsLoading(false);
 
       if (response.data.status === "success") {
         dispatch({
@@ -47,6 +48,7 @@ function SignIn() {
         navigate("/sign-up");
       }
     } catch (error) {
+      setIsLoading(false);
       const alert = (
         <Alert variant="danger" className="py-1">
           Worng Email or Password
@@ -94,7 +96,7 @@ function SignIn() {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-4">
                     <Button type="submit" variant="primary" size="lg">
-                      Sign In
+                      {isLoading ? "Sign In..." : "Sign In"}
                     </Button>
                   </div>
                   <hr />

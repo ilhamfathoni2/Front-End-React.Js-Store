@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { API } from "../../config/api";
 function SignUp() {
   const [, dispatch] = useContext(UserContext);
   let navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -21,6 +22,7 @@ function SignUp() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const config = {
         headers: {
@@ -31,6 +33,7 @@ function SignUp() {
       const body = JSON.stringify(data);
 
       const response = await API.post("/register", body, config);
+      setIsLoading(false);
 
       if (response.data.status === "success") {
         dispatch({
@@ -42,6 +45,7 @@ function SignUp() {
         navigate("/");
       }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -120,7 +124,7 @@ function SignUp() {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-4">
                     <Button type="submit" variant="primary" size="lg">
-                      Sign Up
+                      {isLoading ? "Sign Up..." : "Sign Up"}
                     </Button>
                   </div>
                   <hr />
