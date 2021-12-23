@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react";
-
-import { Button, Form, Modal, Alert } from "react-bootstrap";
-
+import { Button, Form, Modal, Alert, ProgressBar } from "react-bootstrap";
 import { API } from "../../config/api";
+import storage from "../../firebase/index";
 
 function AddItems() {
   const [show, setShow] = useState(false);
@@ -14,8 +13,42 @@ function AddItems() {
 
   const [message, setMessage] = useState(null);
 
+  const [images, setImages] = useState(null);
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  const handleUploadImage = (e) => {
+    if (e.target.files[0]) {
+      setImages(e.target.files[0]);
+    }
+  };
+
+  const uploadFirebase = () => {
+    const uploadTask = storage.ref(`/images/${images.name}`).put(images);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(images.name)
+          .getDownloadURL()
+          .then((url) => {
+            setUrl(url);
+          });
+      }
+    );
+  };
+
   const [form, setForm] = useState({
-    image: "",
     name: "",
     priceBuy: "",
     priceSell: "",
@@ -40,7 +73,7 @@ function AddItems() {
       };
 
       const body = new FormData();
-      body.set("image", form.image[0]);
+      body.set("image", url);
       body.set("name", form.name);
       body.set("priceBuy", form.priceBuy);
       body.set("priceSell", form.priceSell);
@@ -66,6 +99,12 @@ function AddItems() {
     }
   };
 
+  const handleUploadItem = (e) => {
+    e.preventDefault();
+    uploadFirebase();
+    SubmitData();
+  };
+
   return (
     <>
       <h5 className="menu-card" onClick={handleShow}>
@@ -73,7 +112,7 @@ function AddItems() {
       </h5>
 
       <Modal show={show} onHide={handleClose}>
-        <Form onSubmit={SubmitData}>
+        <Form onSubmit={handleUploadItem}>
           <Modal.Body>
             <Modal.Title>Tambah Barang</Modal.Title>
             {message && message}
@@ -83,8 +122,12 @@ function AddItems() {
                 type="file"
                 ref={filePickerRef}
                 accept=".jpg,.png"
-                name="image"
-                onChange={handleChange}
+                onChange={handleUploadImage}
+              />
+              <ProgressBar
+                className="mt-2"
+                now={progress}
+                label={`${progress}%`}
               />
             </Form.Group>
             <Form.Group className="mb-3">
