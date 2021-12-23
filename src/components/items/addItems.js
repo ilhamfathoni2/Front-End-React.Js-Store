@@ -49,6 +49,7 @@ function AddItems() {
   };
 
   const [form, setForm] = useState({
+    image: url,
     name: "",
     priceBuy: "",
     priceSell: "",
@@ -73,7 +74,7 @@ function AddItems() {
       };
 
       const body = new FormData();
-      body.set("image", url);
+      body.set("image", form.image);
       body.set("name", form.name);
       body.set("priceBuy", form.priceBuy);
       body.set("priceSell", form.priceSell);
