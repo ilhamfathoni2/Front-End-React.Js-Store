@@ -14,7 +14,6 @@ function AddItems() {
   const [message, setMessage] = useState(null);
 
   const [images, setImages] = useState(null);
-  const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
 
   const handleUploadImage = (e) => {
@@ -23,33 +22,7 @@ function AddItems() {
     }
   };
 
-  const uploadFirebase = () => {
-    const uploadTask = storage.ref(`/images/${images.name}`).put(images);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(images.name)
-          .getDownloadURL()
-          .then((url) => {
-            setUrl(url);
-          });
-      }
-    );
-  };
-
   const [form, setForm] = useState({
-    image: url,
     name: "",
     priceBuy: "",
     priceSell: "",
@@ -64,46 +37,53 @@ function AddItems() {
     });
   };
 
-  const SubmitData = async (e) => {
-    // e.preventDefault();
+  const SubmitData = (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
     try {
-      const config = {
-        headers: {
-          "Content-type": "multipart/form-data",
+      const uploadTask = storage.ref(`/images/${images.name}`).put(images);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setProgress(progress);
         },
-      };
-
-      const body = new FormData();
-      body.set("image", form.image);
-      body.set("name", form.name);
-      body.set("priceBuy", form.priceBuy);
-      body.set("priceSell", form.priceSell);
-      body.set("stock", form.stock);
-
-      const res = await API.post("/add-item", body, config);
-      if (res.data.status === "success") {
-        const alert = (
-          <Alert variant="success" className="py-1">
-            Success add new item
-          </Alert>
-        );
-        setMessage(alert);
-      }
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(images.name)
+            .getDownloadURL()
+            .then((url) => {
+              const data = {
+                image: url,
+                name: form.name,
+                priceBuy: form.priceBuy,
+                priceSell: form.priceSell,
+                stock: form.stock,
+              };
+              const body = JSON.stringify(data);
+              API.post("/add-item", body, config);
+            });
+        }
+      );
     } catch (error) {
       const alert = (
         <Alert variant="danger" className="py-1">
-          Image must be exist & jpg/png, max size 100kb
+          Filed upload image
         </Alert>
       );
       setMessage(alert);
-      console.log(error);
     }
-  };
-
-  const handleUploadItem = (e) => {
-    e.preventDefault();
-    uploadFirebase();
-    SubmitData();
   };
 
   return (
@@ -113,7 +93,7 @@ function AddItems() {
       </h5>
 
       <Modal show={show} onHide={handleClose}>
-        <Form onSubmit={handleUploadItem}>
+        <Form onSubmit={SubmitData}>
           <Modal.Body>
             <Modal.Title>Tambah Barang</Modal.Title>
             {message && message}
@@ -124,11 +104,6 @@ function AddItems() {
                 ref={filePickerRef}
                 accept=".jpg,.png"
                 onChange={handleUploadImage}
-              />
-              <ProgressBar
-                className="mt-2"
-                now={progress}
-                label={`${progress}%`}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -170,13 +145,17 @@ function AddItems() {
                 min="0"
               />
             </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Process Upload</Form.Label>
+              <ProgressBar animated now={progress} label={`${progress}%`} />
+            </Form.Group>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
             <Button type="submit" variant="primary">
-              Save Item
+              Upload
             </Button>
           </Modal.Footer>
         </Form>

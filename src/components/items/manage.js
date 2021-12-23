@@ -16,9 +16,9 @@ function DetailManage({ item }) {
   const handleShow = () => setShow(true);
 
   const deleteItem = async (e) => {
-    e.preventDefault();
     try {
       await API.delete(`/delete-item/${item.id}`);
+      navigate("/items");
     } catch (error) {
       console.log(error);
     }
@@ -61,11 +61,9 @@ function DetailManage({ item }) {
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Form onSubmit={deleteItem}>
-              <Button type="submit" variant="danger">
-                Delete
-              </Button>
-            </Form>
+            <Button onClick={deleteItem} variant="danger">
+              Delete
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>
