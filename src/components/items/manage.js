@@ -16,6 +16,7 @@ function DetailManage({ item }) {
   const handleShow = () => setShow(true);
 
   const deleteItem = async (e) => {
+    e.preventDefault();
     try {
       await API.delete(`/delete-item/${item.id}`);
     } catch (error) {
