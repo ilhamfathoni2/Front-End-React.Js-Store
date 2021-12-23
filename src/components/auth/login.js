@@ -94,7 +94,7 @@ function SignIn() {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-4">
                     <Button type="submit" variant="primary" size="lg">
-                      Sign Up
+                      Sign In
                     </Button>
                   </div>
                   <hr />
