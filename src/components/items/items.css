@@ -54,6 +54,10 @@ input[type="number"]::-webkit-outer-spin-button {
   display: none;
 }
 
+.p-menu {
+  font-weight: normal;
+}
+
 @media screen and (max-width: 800px) {
   .card-items {
     width: 8rem !important;
@@ -73,8 +77,9 @@ input[type="number"]::-webkit-outer-spin-button {
   .space {
     margin: 0 10px 20px 10px;
   }
+  h5,
   .Rp {
-    font-size: 13px;
+    font-size: 12.5px !important;
   }
   .img-lg {
     display: none;
@@ -87,5 +92,8 @@ input[type="number"]::-webkit-outer-spin-button {
   }
   .edit-page {
     width: 100%;
+  }
+  .p-menu-label {
+    display: none;
   }
 }

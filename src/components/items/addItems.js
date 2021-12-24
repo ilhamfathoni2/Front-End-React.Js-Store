@@ -1,7 +1,16 @@
 import React, { useState, useRef } from "react";
-import { Button, Form, Modal, Alert, ProgressBar } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Modal,
+  Alert,
+  ProgressBar,
+  Image,
+} from "react-bootstrap";
 import { API } from "../../config/api";
 import storage from "../../firebase/index";
+
+import iconAdd from "../../assets/add-item.png";
 
 function AddItems() {
   const [show, setShow] = useState(false);
@@ -88,8 +97,9 @@ function AddItems() {
 
   return (
     <>
-      <h5 className="menu-card" onClick={handleShow}>
-        Tambah Barang
+      <h5 className="menu-card  p-0" onClick={handleShow}>
+        <Image src={iconAdd} />
+        <label className="p-menu-label">Upload</label>
       </h5>
 
       <Modal show={show} onHide={handleClose}>

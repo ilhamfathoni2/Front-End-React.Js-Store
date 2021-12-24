@@ -5,13 +5,19 @@
 }
 
 .menu-card:hover {
-  color: #0383ce;
+  color: #ffbd35 !important;
   cursor: pointer;
   text-decoration: none !important;
 }
 
 .menu-active {
-  color: #0383ce;
+  cursor: pointer;
+  color: #ffbd35;
+  text-decoration: none !important;
+  font-weight: bold;
+}
+.menu-active:hover {
+  color: #ffbd35 !important;
   cursor: pointer;
   text-decoration: none !important;
 }
@@ -26,6 +32,19 @@
   cursor: pointer;
 }
 
+.p-menu-label {
+  font-size: 15px;
+  margin: 0 0 0 10px !important;
+  padding: 0 !important;
+  align-items: center;
+}
+
+.p-menu-label:hover {
+  color: #ffbd35 !important;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
 .bg-black-soft {
   background-color: #2c2828;
 }
@@ -36,5 +55,18 @@
   .menu-logout,
   h5 {
     font-size: 15px !important;
+  }
+  .menu-logout {
+    margin-top: 5px;
+  }
+  .p-menu-label {
+    display: none;
+  }
+  .menu-active {
+    cursor: pointer;
+    background-color: #ffbd35;
+    width: 13px;
+    height: 13px;
+    border-radius: 50px;
   }
 }

@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 
 import { useNavigate, NavLink } from "react-router-dom";
-import { Container, Card, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Card, Image } from "react-bootstrap";
 import "./nav.css";
 import AddItems from "../items/addItems";
 
 import { UserContext } from "../../context/userContext";
+
+import iconHome from "../../assets/home.png";
+import iconManage from "../../assets/edit.png";
 
 function Nav() {
   const [, dispatch] = useContext(UserContext);
@@ -33,7 +36,10 @@ function Nav() {
                     isActive ? "menu-active" : "menu-card"
                   }
                 >
-                  <h5>Barang</h5>
+                  <div className="p-0">
+                    <Image src={iconHome} />
+                    <label className="p-menu-label">Home</label>
+                  </div>
                 </NavLink>
                 <NavLink
                   to="/handle-item"
@@ -41,7 +47,10 @@ function Nav() {
                     isActive ? "menu-active" : "menu-card"
                   }
                 >
-                  <h5>Kelola Barang</h5>
+                  <div className="p-0">
+                    <Image src={iconManage} />
+                    <label className="p-menu-label">Manage</label>
+                  </div>
                 </NavLink>
                 <AddItems />
                 <div className="d-flex justify-content-end">
