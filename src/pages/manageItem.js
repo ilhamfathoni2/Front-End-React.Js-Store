@@ -39,7 +39,7 @@ function ManageItem() {
     <>
       <Nav />
       {datasItem.length !== 0 ? (
-        <Container className="mt-1">
+        <Container className="mt-4 mb-5">
           <div className="d-flex flex-wrap justify-content-center">
             {datasItem.map((item) => (
               <DetailManage item={item} key={item} />
