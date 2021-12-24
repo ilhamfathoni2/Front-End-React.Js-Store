@@ -3,6 +3,19 @@
   width: 18rem !important;
 }
 
+.center {
+  display: flex;
+  align-items: center !important;
+}
+
+.icon-add {
+  background-image: url("../../assets/add-item.png");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  width: 30px;
+  height: 30px;
+}
+
 .img {
   width: 255px;
   height: 255px;
@@ -61,6 +74,9 @@ input[type="number"]::-webkit-outer-spin-button {
 @media screen and (max-width: 800px) {
   .card-items {
     width: 8rem !important;
+  }
+  .center {
+    display: inline;
   }
   .img {
     width: 95px;

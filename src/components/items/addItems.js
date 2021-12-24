@@ -97,8 +97,9 @@ function AddItems() {
 
   return (
     <>
-      <h5 className="menu-card  p-0" onClick={handleShow}>
-        <Image src={iconAdd} />
+      <h5 className="menu-card p-0 center" onClick={handleShow}>
+        {/* <Image src={iconAdd} /> */}
+        <div className="icon-add"></div>
         <label className="p-menu-label">Upload</label>
       </h5>
 

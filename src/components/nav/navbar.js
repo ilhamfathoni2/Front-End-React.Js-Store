@@ -25,8 +25,8 @@ function Nav() {
   };
   return (
     <>
-      <Container className="mt-4">
-        <div className="shadow-lg  mb-5 bg-body rounded">
+      <Container>
+        <div className="shadow-lg  mb-3 bg-body rounded rwb-nav">
           <Card className="bg-black-soft">
             <Card.Body>
               <div className="d-flex flex-row justify-content-around">
@@ -36,8 +36,8 @@ function Nav() {
                     isActive ? "menu-active" : "menu-card"
                   }
                 >
-                  <div className="p-0">
-                    <Image src={iconHome} />
+                  <div className="p-0 center">
+                    <div className="icon-home"></div>
                     <label className="p-menu-label">Home</label>
                   </div>
                 </NavLink>
@@ -47,8 +47,8 @@ function Nav() {
                     isActive ? "menu-active" : "menu-card"
                   }
                 >
-                  <div className="p-0">
-                    <Image src={iconManage} />
+                  <div className="p-0 center">
+                    <div className="icon-manage"></div>
                     <label className="p-menu-label">Manage</label>
                   </div>
                 </NavLink>
