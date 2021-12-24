@@ -117,3 +117,11 @@
     background-size: 30px 30px;
   }
 }
+
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {
+  .icon-home {
+    background-image: url("../../assets/home.png");
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+  }
+}
