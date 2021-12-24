@@ -15,6 +15,10 @@
   width: 30px;
   height: 30px;
 }
+.rwd-search {
+  width: 26% !important;
+  margin-right: 42px !important;
+}
 
 .img {
   width: 255px;
@@ -72,6 +76,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media screen and (max-width: 800px) {
+  .rwd-search {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
   .card-items {
     width: 8rem !important;
   }

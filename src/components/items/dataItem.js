@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import { Container, Card, Image } from "react-bootstrap";
+import {
+  Container,
+  Card,
+  Image,
+  FormControl,
+  InputGroup,
+  Button,
+} from "react-bootstrap";
 import "./items.css";
 
 import Nav from "../nav/navbar";
@@ -17,6 +24,7 @@ function DataItems() {
   document.title = "Store | " + title;
 
   const [datasItem, setDatasItem] = useState([]);
+  const [searchTitle, setsearchTitle] = useState("");
 
   const getItems = async () => {
     try {
@@ -40,26 +48,48 @@ function DataItems() {
   return (
     <>
       <Nav />
+      <Container className="d-flex justify-content-end">
+        <InputGroup className="width-min mt-4 rwd-search">
+          <FormControl
+            type="text"
+            placeholder="Search item.."
+            onChange={(event) => {
+              setsearchTitle(event.target.value);
+            }}
+          />
+          <Button variant="warning">Search</Button>
+        </InputGroup>
+      </Container>
       {datasItem.length !== 0 ? (
         <Container className="mt-4 mb-5">
           <div className="d-flex flex-wrap justify-content-center">
-            {datasItem.map((item, index) => (
-              <div className="space" key={item}>
-                <Card className="card-items">
-                  <Card.Body className="pointer">
-                    <Link to={`/detail/${item.id}`} className="link">
-                      <Image src={item.image} className="img mb-3" />
-                      <div className="d-flex justify-content-between rs">
-                        <h5 className="name-item">{item.name}</h5>
-                        <h5 className="text-danger Rp">
-                          <b>{convertRupiah.convert(item.priceSell)}</b>
-                        </h5>
-                      </div>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </div>
-            ))}
+            {datasItem
+              .filter((item) => {
+                if (searchTitle === "") {
+                  return item;
+                } else if (
+                  item.name.toLowerCase().includes(searchTitle.toLowerCase())
+                ) {
+                  return item;
+                }
+              })
+              .map((item) => (
+                <div className="space" key={item}>
+                  <Card className="card-items">
+                    <Card.Body className="pointer">
+                      <Link to={`/detail/${item.id}`} className="link">
+                        <Image src={item.image} className="img mb-3" />
+                        <div className="d-flex justify-content-between rs">
+                          <h5 className="name-item">{item.name}</h5>
+                          <h5 className="text-danger Rp">
+                            <b>{convertRupiah.convert(item.priceSell)}</b>
+                          </h5>
+                        </div>
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
           </div>
         </Container>
       ) : (
