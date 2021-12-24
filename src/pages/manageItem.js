@@ -31,7 +31,7 @@ function ManageItem() {
         },
       };
 
-      const response = await API.get("/get-item", config);
+      const response = await API.get("/get-item-user", config);
       setDatasItem(response.data.data);
     } catch (error) {
       console.log(error);
