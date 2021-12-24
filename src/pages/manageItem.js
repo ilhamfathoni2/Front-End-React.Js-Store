@@ -77,6 +77,7 @@ function ManageItem() {
         </Container>
       ) : (
         <div className="text-center pt-5">
+          <h3 className="mb-4 mt-3">You havent uploaded your item yet!</h3>
           <Image src={notFound} className="img-lg" />
           <Image src={notFoundPhone} className="img-sml" />
         </div>
