@@ -7,9 +7,6 @@ import AddItems from "../items/addItems";
 
 import { UserContext } from "../../context/userContext";
 
-import iconHome from "../../assets/home.png";
-import iconManage from "../../assets/edit.png";
-
 function Nav() {
   const [, dispatch] = useContext(UserContext);
 

@@ -75,6 +75,13 @@
 }
 
 @media screen and (max-width: 700px) {
+  .rwb-nav {
+    position: fixed;
+    z-index: 9999999;
+    bottom: 0;
+    width: 93% !important;
+    margin-bottom: 8px !important;
+  }
   .menu-card,
   .menu-active,
   .menu-logout,
@@ -97,31 +104,9 @@
     height: 13px;
     border-radius: 50px;
   }
-}
-
-@media all and (-webkit-min-device-pixel-ratio: 1.5),
-  all and (-o-min-device-pixel-ratio: 3 / 2),
-  all and (min--moz-device-pixel-ratio: 1.5),
-  all and (min-device-pixel-ratio: 1.5) {
-  .icon-home {
-    background-image: url("../../assets/home.png");
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-  }
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .icon-home {
-    background-image: url("../../assets/home.png");
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
-  }
-}
-
-@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {
-  .icon-home {
-    background-image: url("../../assets/home.png");
-    background-repeat: no-repeat;
-    background-size: 30px 30px;
+  .menu-logout {
+    margin-top: 6px;
+    color: #cccccca2;
+    cursor: pointer;
   }
 }

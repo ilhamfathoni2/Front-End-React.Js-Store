@@ -10,8 +10,6 @@ import {
 import { API } from "../../config/api";
 import storage from "../../firebase/index";
 
-import iconAdd from "../../assets/add-item.png";
-
 function AddItems() {
   const [show, setShow] = useState(false);
 
@@ -98,7 +96,6 @@ function AddItems() {
   return (
     <>
       <h5 className="menu-card p-0 center" onClick={handleShow}>
-        {/* <Image src={iconAdd} /> */}
         <div className="icon-add"></div>
         <label className="p-menu-label">Upload</label>
       </h5>
