@@ -134,7 +134,7 @@ function EditItem() {
       <Nav />
       {datasItem.length !== 0 ? (
         <Container>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center mt-4 mb-5">
             {datasItem.map((item) => (
               <div className="space" key={item}>
                 <div className="d-flex justify-content-between mb-2">
