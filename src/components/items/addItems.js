@@ -1,12 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  Button,
-  Form,
-  Modal,
-  Alert,
-  ProgressBar,
-  Image,
-} from "react-bootstrap";
+import { Button, Form, Modal, Alert, ProgressBar } from "react-bootstrap";
 import { API } from "../../config/api";
 import storage from "../../firebase/index";
 
@@ -71,22 +64,30 @@ function AddItems() {
             .child(images.name)
             .getDownloadURL()
             .then((url) => {
-              const data = {
+              const dataInput = {
                 image: url,
                 name: form.name,
                 priceBuy: form.priceBuy,
                 priceSell: form.priceSell,
                 stock: form.stock,
               };
-              const body = JSON.stringify(data);
-              API.post("/add-item", body, config);
+              const body = JSON.stringify(dataInput);
+              const response = API.post("/add-item", body, config);
+              if (response.data.status === "success") {
+                const alert = (
+                  <Alert variant="success" className="py-1">
+                    Upload success
+                  </Alert>
+                );
+                setMessage(alert);
+              }
             });
         }
       );
     } catch (error) {
       const alert = (
         <Alert variant="danger" className="py-1">
-          Filed upload image
+          Filed upload
         </Alert>
       );
       setMessage(alert);

@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import { Button, Form, Container, Card, Alert } from "react-bootstrap";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import "./auth.css";
 
 import { UserContext } from "../../context/userContext";
-
 import { API } from "../../config/api";
 
 function SignIn() {
@@ -96,7 +94,11 @@ function SignIn() {
                   </Form.Group>
                   <div className="d-grid gap-2 mt-4">
                     <Button type="submit" variant="primary" size="lg">
-                      {isLoading ? "Sign In..." : "Sign In"}
+                      {isLoading ? (
+                        <AiOutlineLoading3Quarters className="loading" />
+                      ) : (
+                        "Sign In"
+                      )}
                     </Button>
                   </div>
                   <hr />
